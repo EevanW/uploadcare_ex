@@ -10,9 +10,9 @@ defmodule UploadcareEx.API.Upload.Url do
 
   @spec upload(binary()) :: {:ok, map()} | {:error, any()}
   def upload(url) do
-    with {:ok, token} <- url |> try_to_upload(),
-         {:ok, result} <- token |> check_token_status() do
-      {:ok, result}
+    with {:ok, token} <- url |> try_to_upload() |> IO.inspect(label: :try),
+         {:ok, result} <- token |> check_token_status() |> IO.inspect(label: :status) do
+      {:ok, token}
     end
   end
 
